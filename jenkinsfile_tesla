@@ -23,7 +23,9 @@ node{
     input message: 'Application ready for deployment, Please review and approve'
       }
   }
-  stage('7deploy2Prod'){deploy adapters: [tomcat9(credentialsId: 'New-tomcat-credential', path: '', url: 'http://54.151.7.143:8080/')], contextPath: null, war: 'target/*war'}
+  stage('7deploy2Prod'){
+  sh "sleep 50"
+  deploy adapters: [tomcat9(credentialsId: 'New-tomcat-credential', path: '', url: 'http://54.151.7.143:8080/')], contextPath: null, war: 'target/*war'}
   stage('8emailNotification'){emailext body: '''Hi All,
 
 Check Build status.
